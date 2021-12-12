@@ -1,0 +1,28 @@
+.calc-container{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.button-container {
+    height: 1000px;
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.button-container button {
+    flex: 3 25%;
+    height: 200px;
+}
+
+.operator {
+    background-color:aqua;
+
+}
+.num{
+    background-color:azure;
+    
+}
