@@ -1,21 +1,30 @@
+.display{
+    height: 150px;
+    width: 600px;
+    align-self: center;
+    background-color:rgb(236, 235, 233);
+    font-size: 7vw;
+}
+
 .calc-container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-content: center;
-
 }
 
 .button-container {
+    align-self: center;
     height: 1000px;
     width: 600px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .button-container button {
     flex: 3 25%;
     height: 200px;
+    font-size: 4vw;
 }
 
 .operator {

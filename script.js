@@ -1,3 +1,22 @@
+let number = 0;
+const nums = document.querySelectorAll(".num");
+const buttons = document.querySelectorAll(".button-container button");
+const display = document.querySelector(".display");
+
+nums.forEach((num) => {
+    num.addEventListener('click', () => {
+        number = num.dataset.choice;
+        display.textContent = display.textContent + num.dataset.choice;
+        console.log(number);
+    })
+});
+
+
+
+
+/*************************************************************************/
+//function Definitions
+
 function add(a, b)
 {
     return a + b;
@@ -28,8 +47,13 @@ function operate(operator, a, b)
     {
         return multiply(a, b);
     }
-    if(operator = "/")
+    if(operator == "/")
     {
         return divide(a, b);
     }
+    else
+    {
+        return;
+    } 
 }
+
