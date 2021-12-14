@@ -1,13 +1,52 @@
-let number = 0;
+let input = [];
+let numbers = [];
+let operators = [];
 const nums = document.querySelectorAll(".num");
 const buttons = document.querySelectorAll(".button-container button");
 const display = document.querySelector(".display");
 
-nums.forEach((num) => {
-    num.addEventListener('click', () => {
-        number = num.dataset.choice;
-        display.textContent = display.textContent + num.dataset.choice;
-        console.log(number);
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let selection = button.dataset.choice;
+        if(!parseInt(selection))
+        {
+            if(selection == 'Clear')
+            {
+                display.textContent = '';
+                input = []
+                numbers = [];
+                operators = [];
+            }
+            else if(selection == 'Del')
+            {
+                display.textContent = input.slice(0, input.length -1).join("");
+                input.pop();
+            }
+            else if(selection == '.')
+            {
+                if(!input.some(inp => "." == inp))
+                {
+                    input.push(selection);
+                    display.textContent = display.textContent + selection;
+                }
+            }
+            else
+            {
+                input.push(selection);
+                display.textContent = display.textContent + selection;
+            }
+
+        }
+        else
+        {
+            input.push( parseInt(selection));
+            display.textContent = display.textContent + selection;
+        }
+        
+        if( input.length > 1)
+        {
+            calcuate();
+        }
     })
 });
 
@@ -31,6 +70,11 @@ function multiply(a, b)
 }
 function divide(a, b)
 {
+    if(b == 0)
+    {
+        alert("You cannot divide by zero, Punk")
+        return;
+    }
     return a/b;
 }
 function operate(operator, a, b)
@@ -56,4 +100,40 @@ function operate(operator, a, b)
         return;
     } 
 }
-
+function calcuate ()
+{
+    let lastInput = input[input.length - 1];
+    if(lastInput != '.')
+    {
+        if( typeof(lastInput) == "string")
+        {   
+            
+                input.pop();
+                operators.push(lastInput);
+                numbers.push(parseFloat(input.join("")));
+            
+            if(operators.length > 1)
+            {
+                let output = operate(operators[0], numbers[0], numbers[1])
+                display.textContent = output;
+                if(operators[1] == "=")
+                {
+                    numbers = [];
+                    operators = [];
+                    input=[output];
+                }
+                else if(operators[1] != "=")
+                {
+                    numbers = [output];
+                    operators = [operators[1]];
+                    display.textContent = display.textContent + operators;
+                    input = [];
+                }
+            }
+            else
+            {
+                input=[];
+            }
+        }
+    }
+}
