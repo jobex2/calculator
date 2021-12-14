@@ -3,7 +3,14 @@
     width: 600px;
     align-self: center;
     background-color:rgb(236, 235, 233);
-    font-size: 7vw;
+    font-size: 45px;
+}
+.result {
+    height: 75px;
+    width: 600px;
+    align-self: center;
+    background-color:rgb(153, 153, 153);
+    font-size: 40px;
 }
 
 .calc-container{
@@ -15,7 +22,7 @@
 
 .button-container {
     align-self: center;
-    height: 1000px;
+    height: 500px;
     width: 600px;
     display: flex;
     flex-wrap: wrap;
@@ -23,8 +30,8 @@
 
 .button-container button {
     flex: 3 25%;
-    height: 200px;
-    font-size: 4vw;
+    height: 100px;
+    font-size: 40px;
 }
 
 .operator {

@@ -4,6 +4,8 @@ let operators = [];
 const nums = document.querySelectorAll(".num");
 const buttons = document.querySelectorAll(".button-container button");
 const display = document.querySelector(".display");
+const result = document.querySelector(".result");
+
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -77,6 +79,14 @@ function divide(a, b)
     }
     return a/b;
 }
+function mod(a,b)
+{
+    return a%b;
+}
+function exp(a,b)
+{
+    return a**b;
+}
 function operate(operator, a, b)
 {
     if(operator == "+")
@@ -95,10 +105,19 @@ function operate(operator, a, b)
     {
         return divide(a, b);
     }
+    if(operator == "^")
+    {
+        return exp(a,b);
+    }
+    if(operator =="%")
+    {
+        return mod(a,b);
+    }
     else
     {
         return;
-    } 
+    }
+
 }
 function calcuate ()
 {
@@ -116,6 +135,8 @@ function calcuate ()
             {
                 let output = operate(operators[0], numbers[0], numbers[1])
                 display.textContent = output;
+                result.textContent = output;
+
                 if(operators[1] == "=")
                 {
                     numbers = [];
