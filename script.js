@@ -1,6 +1,8 @@
 let input = [];
 let numbers = [];
 let operators = [];
+let keys = ['1','2','3','4','5','6','7','8','9','0',
+    'Escape','Delete','=','Enter','+','-','*','/','.','%','^'];
 const nums = document.querySelectorAll(".num");
 const buttons = document.querySelectorAll(".button-container button");
 const display = document.querySelector(".display");
@@ -10,49 +12,11 @@ const result = document.querySelector(".result");
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
         let selection = button.dataset.choice;
-        if(!parseInt(selection))
-        {
-            if(selection == 'Clear')
-            {
-                display.textContent = '';
-                input = []
-                numbers = [];
-                operators = [];
-            }
-            else if(selection == 'Del')
-            {
-                display.textContent = input.slice(0, input.length -1).join("");
-                input.pop();
-            }
-            else if(selection == '.')
-            {
-                if(!input.some(inp => "." == inp))
-                {
-                    input.push(selection);
-                    display.textContent = display.textContent + selection;
-                }
-            }
-            else
-            {
-                input.push(selection);
-                display.textContent = display.textContent + selection;
-            }
-
-        }
-        else
-        {
-            input.push( parseInt(selection));
-            display.textContent = display.textContent + selection;
-        }
-        
-        if( input.length > 1)
-        {
-            calcuate();
-        }
+        inputToArray(selection);
     })
 });
 
-
+document.addEventListener('keydown', keypress);
 
 
 /*************************************************************************/
@@ -137,7 +101,7 @@ function calcuate ()
                 display.textContent = output;
                 result.textContent = output;
 
-                if(operators[1] == "=")
+                if(operators[1] == "=" || operators[1] == "Enter" )
                 {
                     numbers = [];
                     operators = [];
@@ -156,5 +120,56 @@ function calcuate ()
                 input=[];
             }
         }
+    }
+}
+function keypress(e)
+{
+    let selection = e.key;
+    if(!keys.some(key => selection == key))
+    {
+        return;
+    }
+    inputToArray(selection);
+}
+function inputToArray(selection)
+{
+    if(!parseInt(selection))
+        {
+            if(selection == 'Escape')
+            {
+                display.textContent = '';
+                input = []
+                numbers = [];
+                operators = [];
+            }
+            else if(selection == 'Delete')
+            {
+                display.textContent = input.slice(0, input.length -1).join("");
+                input.pop();
+            }
+            else if(selection == '.')
+            {
+                if(!input.some(inp => "." == inp))
+                {
+                    input.push(selection);
+                    display.textContent = display.textContent + selection;
+                }
+            }
+            else
+            {
+                input.push(selection);
+                display.textContent = display.textContent + selection;
+            }
+
+        }
+    else
+    {
+        input.push( parseInt(selection));
+        display.textContent = display.textContent + selection;
+    }
+    
+    if( input.length > 1)
+    {
+        calcuate();
     }
 }
